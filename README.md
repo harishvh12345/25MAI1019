@@ -35,20 +35,9 @@ affordmed-submission/
 
 **Run:**
 ```bash
-python priority_inbox.py        # Top 10 (default)
-python priority_inbox.py 15     # Top 15
-```
+python priority_inbox.py        
+python priority_inbox.py 15     
 
-**Algorithm:** Min-heap of size N. O(log N) per new notification.
-
-**Priority formula:**
-```
-score = (type_weight_normalized × 0.6) + (recency_score × 0.4)
-type weights: Placement=3, Result=2, Event=1
-recency_score = 1 / (1 + hours_elapsed)
-```
-
----
 
 ## Stage 7 — Next.js Frontend
 
@@ -64,26 +53,4 @@ App runs at **http://localhost:3000**
 - `/notifications` — All notifications with type filters, pagination, read/unread state
 - `/priority` — Priority inbox with adjustable top-N slider (5–20) and type filter
 
-**Key features:**
-- Material UI throughout
-- Unread/viewed tracking via localStorage (survives page refresh)
-- API proxy at `/api/notifications` handles CORS with upstream
-- Responsive (mobile + desktop)
-- Loading skeletons, error states with retry
-- Notification type color-coding (Placement=blue, Result=purple, Event=orange)
-- Priority scores displayed in priority view
 
----
-
-## Tech Stack
-
-| Layer | Choice |
-|---|---|
-| Frontend | Next.js 14 (App Router) + TypeScript |
-| UI Library | Material UI v5 |
-| State | React useState/useEffect + localStorage |
-| API Proxy | Next.js Route Handler |
-| DB (design) | PostgreSQL with partitioning |
-| Cache (design) | Redis + read replicas |
-| Queue (design) | RabbitMQ / Redis Streams |
-| Real-time (design) | WebSocket (Socket.IO) |
